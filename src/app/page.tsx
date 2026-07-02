@@ -11,6 +11,7 @@ import {
   calculateItemTotal,
   generateWhatsAppMessage,
   generateOwnerWhatsAppMessage,
+  saveOrderToLocalStorage,
   OWNER_PHONE,
 } from './menu-data';
 
@@ -57,11 +58,14 @@ export default function Home() {
 
     const estimatedTime = 15;
 
-    // Enlace para el cliente (confirmación)
+    // Guardar en localStorage para el panel admin
+    saveOrderToLocalStorage(customerName, cart, total);
+
+    // Enlace WhatsApp para el cliente
     const clientMessage = generateWhatsAppMessage(customerName, cart, total, estimatedTime);
     const clientUrl = `https://wa.me/${OWNER_PHONE}?text=${clientMessage}`;
-
     window.open(clientUrl, '_blank');
+
     setOrderSent(true);
   };
 
@@ -70,9 +74,7 @@ export default function Home() {
 
     const ownerMessage = generateOwnerWhatsAppMessage(customerName, cart, total);
     const ownerUrl = `https://wa.me/${OWNER_PHONE}?text=${encodeURIComponent(ownerMessage)}`;
-
     window.open(ownerUrl, '_blank');
-    setOrderSent(true);
   };
 
   return (
@@ -107,6 +109,15 @@ export default function Home() {
         ))}
       </section>
 
+      {/* ─── ADMIN LINK (pequeño) ────────────── */}
+      <a
+        href="/admin"
+        className="fixed top-4 right-4 z-20 bg-white/5 border border-white/10 hover:bg-white/10 text-gray-500 hover:text-white text-xs px-3 py-1.5 rounded-lg transition-all"
+        title="Panel del dueño"
+      >
+        🔐 Admin
+      </a>
+
       {/* ─── FLOATING CART BUTTON ────────────── */}
       {cart.length > 0 && (
         <>
@@ -134,7 +145,7 @@ export default function Home() {
             onClose={() => setShowCart(false)}
             onUpdateQuantity={updateQuantity}
             onRemoveItem={removeItem}
-            onClearCart={clearCart}
+            onClearCart={clearC customerName={customerName}\n            setCustomerName={setCustomerName}\n            onClose={() => setShowCart(false)}\n            onUpdateQuantity={updateQuantity}\n            onRemoveItem={removeItem}\n            onClearCart={clearCart}
             onOrder={handleOrder}
             onOrderOwner={handleOwnerOrder}
             orderSent={orderSent}
@@ -516,8 +527,6 @@ function CartDrawer({
             ) : (
               cart.map((item, index) => {
                 const itemTotal = calculateItemTotal(item);
-                const extrasPrice = item.selectedExtras.reduce((s, e) => s + e.price, 0);
-                const optionsPrice = Object.values(item.selectedOptions).reduce((s, o) => s + o.price, 0);
 
                 return (
                   <div
@@ -633,7 +642,10 @@ function CartDrawer({
                 <span className="text-5xl block mb-4">✅</span>
                 <h3 className="text-xl font-bold mb-2">¡Pedido enviado!</h3>
                 <p className="text-gray-400 text-sm mb-6">
-                  Se ha abierto WhatsApp con tu pedido. Solo confirma y listo.
+                  Se ha abierto WhatsApp con tu pedido. Solo confirma y el dueño lo recibirá al instante.
+                </p>
+                <p className="text-xs text-gray-600 mb-4">
+                  El pedido también queda registrado en el panel del dueño 🧑‍🍳
                 </p>
                 <button
                   onClick={() => {
@@ -655,6 +667,7 @@ function CartDrawer({
                     <div key={i} className="flex justify-between text-sm">
                       <span className="text-gray-300">
                         {item.quantity}x {item.name}
+                        {item.notes ? ` 📝${item.notes}` : ''}
                       </span>
                       <span className="text-white font-medium">{formatPrice(calculateItemTotal(item))}€</span>
                     </div>
@@ -667,7 +680,7 @@ function CartDrawer({
                 </div>
 
                 <p className="text-xs text-gray-500 mb-4 text-center">
-                  Al enviar el pedido se abrirá WhatsApp. Confirma el envío para que el dueño lo reciba.
+                  Al enviar se abrirá WhatsApp. Confirma el envío para que el dueño lo reciba.
                 </p>
 
                 <div className="flex gap-3">
@@ -698,3 +711,4 @@ function CartDrawer({
     </>
   );
 }
+"}]}}]
