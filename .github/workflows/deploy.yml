@@ -26,8 +26,8 @@ jobs:
           node-version: "20"
       - name: Install dependencies
         run: npm install --legacy-peer-deps
-      - name: Build with Next.js
-        run: npx next build
+      - name: Build
+        run: npm run build
         env:
           NEXT_PUBLIC_OWNER_PHONE: "34600000000"
       - name: Upload artifact
