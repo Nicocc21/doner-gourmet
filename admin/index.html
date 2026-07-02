@@ -1,1 +1,284 @@
-<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Do�ner Gourmet - Admin</title><style>*{ margin:0; padding:0; box-sizing: border-box; } body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #f5f5f5; } .container { max-width: 768px; margin: 0 auto; padding: 1rem; } .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; } .header h1 { font-size: 1.25rem; } .badge { display: inline-block; padding: 0.25rem 0.5rem; border-radius: 1rem; font-size: 0.75rem; font-weight: 600; } .badge-pendiente { background: #dc2626; color: #fff; } .badge-preparando { background: #f59e0b; color: #000; } .badge-listo { background: #166534; color: #fff; } .badge-entregado { background: rgba(255,255,255,0.1); color: #6b7885; } .order-card { background: #1a1a1a; border: 1px solid rgba(255,255,255, 0.1); border-radius: 0.75rem; padding: 1rem; margin-bottom: 0.75rem; } .order-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; } .order-card .name { font-weight: 700; } .order-card .time { font-size: 0.75rem; color: #6b7885; } .order-items { background: rgba(0,0,0,0.3); border-radius: 0.5rem; padding: 0.75rem; font-size: 0.85rem; color: #9ca3af; margin-bottom: 0.75rem; white-space: pre-wrap;  } .order-card .total { font-size: 1.1rem; font-weight: 700; color: #dc2626; } .btn-group { display: flex; gap: 0.5rem; margin-top: 0.75rem; } .bgaction { padding: 0.5rem 1rem; border-none; border-radius: 0.5rem; cursor: pointer; font-size: 0.75rem; font-weight: 600; transition: all 0.2s; } .btn-deliver { background: #166534; color: #fff; } .btn-delete { background: rgba(220,38,38,0.2); color: #dc2626; } .btn-back { background: rgba(255,255,255,0.1); color: #9ca3af; } .btn-primary { background: #dc2626; color: #fff; } .password-panel { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 50vh; } .password-panel input { width: 100%; max-width: 20rem; padding: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255, 0.1); border-radius: 0.5rem; color: #fff; outline: none; margin-top: 1rem; } .password-panel input:focus { border-color: rgba(220,38,38,0.5); } .filter-bar { display: flex; gap: 0.5rem; overflow-x: auto; padding: 0.5rem 0; } .filter-bar button { padding: 0.3rem 0.75rem; border: none; border-radius: 0.5rem; cursor: pointer; font-size: 0.75rem; white-space: nowrap; } .filter-active { background: #dc2626; color: #fff; } .filter-inactive { background: rgba(255,255,255,0.05); color: #9ca3af; } .search { width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; color: #fff; outline: none; margin: 0 0 1rem 0; } .empty { text-align: center; color: #6b7885; padding: 3rem 0; } .manual-btn { background: rgba(245,158,11,0.2); color: #f59e0b; border: 1px solid rgba(245,158,11,0.5); padding: 0.75rem 1.25rem; border-radius: 0.75rem; cursor: pointer; font-size: 0.85rem; font-weight: 600; width: 100%; } .modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 100; display: flex; align-items: center; justify-content: center; } .modal-box { background: #1a1a1a; padding: 1.5rem; border-radius: 1rem; max-width: 24rem; width: 100%; } .modal-box h2 { margin-bottom: 1rem; } .modal-box input, modal box textarea { width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; color: #fff; outline: none; margin-bottom: 0.75rem; } .modal-box .btn { width: 100%; padding: 0.75rem; border: none; border-radius: 0.75rem; color: #fff; font-weight: 700; cursor: pointer; } .modal-actions { display: flex; gap: 0.5rem; margin-top: 1rem; } .modal-actions .btn { flex: 1; } .filetabRating { display: flex; align-items: center; gap: 0.5rem; } .logout-btn { background: rgba(220,38,38,0.2); color: #dc2626; border: none; cursor: pointer; padding: 0.3rem 0.75rem; border-radius: 0.25rem; font-size: 0.75rem; }</style></head><body><div class="container"><div class="header"><h1>🔠 Döner Gourmet Admin</h1><div class="filetabRating"><span><❱</span></div></div><div id="app"></div></div><script>$(d=256,e=[],n=[];function checkPass(){let a=document.getElementById("pwd").value;"admin123"===a?(document.getElementById("app").innerHTML="",render(),ord({})):document.getElementById("app").innerHTML='<div class="password-panel"><span style="font-size:2rem">💠</span><h3>Acceso de Admin</h3><input id="pwd" type="password" placeholder="Contraseña de admin" onkeydown="13===event.keyCode&&checkPass()"><button class="btn-group btn-primary" style="margin-top:1rem;padding:0.75rem 3rem;border:none;border-radius:0.75rem;cursor:pointer;color:#fff;font-weight:700" onclick="checkPass()">Entrar</button></div>',document.getElementById("pwd")?.focus()}function ord(a){$.adds(a),m=a,save(),$.popup&&$.popup.show()}function save(){localStorage.setItem("doner-orders",JSON.stringify(%))}function render(){const a=document.getElementById("app").er=0r;.statuses="err";if(!m.length){$.slt=!0}}function del(a){m.splice(m.findIndex(c=>c.id===a),1),save(),render()}function st(a,b){const c=m.find(c=>c.id===a);c&&(c.status=b),s(),JSON.parse(LocalStorage.getItem("doner-orders")||"[]")},m.forEach(x=>delete x.elem)}const model="d#256";function render(){let a=document.getElementById("app"),b=[];n.forEach(x=>b&&x.indexOf(c)||(b=[])),b=s.filter(c=>{const d=m.find(e=>e.id===c);return d&&d.status===b}),a.innerHTML=`<div class="search"><input id="sr" type="text" placeholder="💐 Buscar pedido..." oninput="rf()"></div><div class="filter-bar">${["todos","pendiente","preparando","listo","entregado"].map(c=>`<button class="${j===c?"filter-active":"filter-inactive"}" onclick="j=c; render()">${{"lodo":"🐯 (<span id="ctod">$+)`,null:`},&selectedExtras.map(e=>`<span style="color:#f59e0b;font-size:0.75rem">+$+e.name.toLowerCase()</span>`).join(" ")}<p>${x.notes?`(🍍* ${x.notes}`:""}</p></div><div class="order-items">${x.items}</div><div class="bottom"><div><span class="total">${x.total}</span></div><div class="btn-group">${"entregado"===x.status?"<button class='bgaction btn-delete' onClick='deleteOrder(\'"+x.id+'\')'>Eliminar pedido</button>":statusBtns(x.status,m=>m.id===x.id).map(([text,cls,onc],abc)=>a</button>`).join(" ")}</div></div></div>`).join("")};const s = save()}function st(a,b){const c=m.find(c=>c.id===a);c&&(c.status=b),save(),render()}function deleteOrder(a){const b=m.find(c=>c.id===a);b&&(m.splice(n.lastIndexOf(b),1),save(),render())}function find(){const a=document.getElementById("sr").value.toLowerCase();n.length=0,m.forEach(c=>{;c.customerName.toLowerCase().includes(a)}),render()}document.addEventListener("DOMContentLoaded",()=>{checkPass()});let s=[];s.add(e),n.push(a)}()</script></body></html>
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Do�ner Gourmet - Admin</title><style>*{ margin:0; padding:0; box-sizing: border-box; }body{ font-family: 'Inter', sans-serif; background: #0a0a0a; color: #f5f5f5; }.container{ max-width: 768px; margin: 0 auto; padding: 1rem; }.header{ display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }.header h1{ font-size: 1.25rem; }.logout-btn{ background: rgba(220,38,38,0.2); color: #dc2626; border: none; cursor: pointer; padding: 0.3rem 0.75rem; border-radius: 0.25rem; font-size: 0.75rem; }.filter-bar{ display: flex; gap: 0.5rem; overflow-x: auto; padding: 0.5rem 0; }.filter-bar button{ padding: 0.3rem 0.75rem; border: none; border-radius: 0.5rem; cursor: pointer; font-size: 0.75rem; white-space: nowrap; transition: all 0.2s; }.filter-active{ background: #dc2626; color: #fff; }.filter-inactive{ background: rgba(255,255,255,0.05); color: #9ca3af; }.filter-inactive:hover{ background: rgba(255,255,255,0.1); }.search{ width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; color: #fff; outline: none; margin: 0 0 1rem 0; }.search::online-placeholder{filter:none}.search::placeholder{ color: #333; }.order-card{
+background: #1a1a1a;
+border: 1px solid rgba(255,255,255, 0.1);
+border-radius: 0.75rem;
+padding: 1rem;
+margin-bottom: 0.75rem;
+}
+.order-card-header{ display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; }.order-card .name{ font-weight: 700; }.order-card .time{ font-size: 0.75rem; color: #6b7885; }.badge{ display: inline-block; padding: 0.25rem 0.5rem; border-radius: 1rem; font-size: 0.75rem; font-weight: 600; }.ba-pendiente{ background: #dc2626; color: #fff; }.ba-preparando{ background: #f59e0b; color: #000; }.ba-listo{ background: #166534; color: #fff; }.ba-entregado{ background: rgba(255,255,255,0.05); color: #627484; }.order-items{
+  background: rgba(0,0,0,0.3); border-radius: 0.5rem; padding: 0.75rem; font-size: 0.85rem; color: #9ca3af; margin-bottom: 0.75rem; white-space: pre-wrap; }.order-card .total{ font-size: 1.1rem; font-weight: 700; color: #dc2626; }.order-card .bottom{ display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem; }.btn-group{ display: flex; gap: 0.3rem; }.bgaction{ padding: 0.5rem 0.75rem; border: none; border-radius: 0.5rem; cursor: pointer; font-size: 0.75rem; font-weight: 600; transition: all 0.2s; }.btn-deliver{ background: #166534; color: #fff; }.btn-delete{ background: rgba(220,38,38,0.2); color: #dc2626; }.btn-back{ background: rgba(255,255,255,0.05); color: #9ca3af; }.btn-primary{ background: #dc2626; color: #fff; }.empty{ height: 4rem; display: flex; align-items: center; justify-content: center; color: #6b7885; }.manual-btn{ background: rgba(245,158,11,0.2); color: #f59e0b; border: 1px solid rgba(245,158,11,0.5); padding: 0.75rem 1.25rem; border-radius: 0.75rem; cursor: pointer; font-size: 0.85rem; font-weight: 600; width: 100%; }.modal{ position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 100; display: flex; align-items: center; justify-content: center; }.modal-box{ background: #1a1a1a; padding: 1.5rem; border-radius: 1rem; max-width: 24rem; width: 100%; }.modal-box h2{ font-size: 1.1rem; margin-bottom: 1rem; }.modal-box input,.modal-box textarea{ width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.75rem; color: #fff; outline: none; margin-bottom: 0.75rem; }.modal-box input::placeholder{ color: #333; }.modal-actions{ display: flex; gap: 0.5rem; margin-top: 1rem; }.modal-actions .btn{ flex: 1; padding: 0.75rem; border: none; border-radius: 0.75rem; color: #fff; font-weight: 700; cursor: pointer; }.password-panel{ display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 50vh; }.password-panel input{ max-width: 20rem; width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; color: #fff; outline: none; margin-top: 1rem; }.password-panel input:focus{ border-color: rgba(220,38,38,0.5); }.white-box{
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  margin: 0 0 1rem 0;
+}</style></head><body>
+  <div class="container">
+    <div class="header">
+      <h1>🔠 Döner Gourmet Admin</h1>
+      <button id="logoutBtn" class="logout-btn" style="display:none" onclick="logout()">Salir</button>
+    </div>
+    <div id="app">
+      <!-- Login panel or admin panel -->
+    </div>
+  </div>
+
+  <script>
+// Orders database
+let orders = [];
+let currentFilter = 'odos';
+let searchQuery = '';
+let isLoggedIn = false;
+
+// Format price
+function fmtPrice(p) {
+  return p.toFixed(2).replace('.', ',');
+}
+
+// Load orders from localStorage
+function loadOrders() {
+  const s = localStorage.getItem('doner-orders');
+  if (s) {
+    try {
+      orders = JSON.parse(s);
+    } catch (e) {
+      orders = [];
+    }
+  }
+}
+
+function saveOrders() {
+  localStorage.setItem('doner-orders', JSON.stringify(orders));
+}
+
+// Status labels
+const statusLabels = {
+  'pendiente': { label: 'Pendiente', cls: 'ba-pendiente' },
+  'preparando': { label: 'Preparando', cls: 'ba-preparando' },
+  'listo': { label: 'Listo', cls: 'ba-listo' },
+  'entregado': { label: 'Entregado', cls: 'ba-entregado' }
+};
+
+// Status flow order
+function getNextStatus(s) {
+  if (s == 'pendiente') return 'preparando';
+  if (s == 'preparando') return 'listo';
+  if (s == 'listo') return 'entregado';
+  return null;
+}
+
+function getPrevStatus(s) {
+  if (s == 'entregado') return 'listo';
+  if (s == 'listo') return 'preparando';
+  if (s == 'preparando') return 'pendiente';
+  return null;
+}
+
+// Show login panel
+function showLogin() {
+  const app = document.getElementById('app');
+  app.innerHTML = `
+    <div class="password-panel">
+      <span style="font-size:2rem">💠</span>
+      <h3>Acceso de Admin</h3>
+      <input id="pwd" type="password" placeholder="Contraseña de admin" onkeydown="if (event.key === 'Enter') checkPass()">
+      <button class="bgaction btn-primary" style="margin-top:1rem;padding:0.75rem 3rem;font-size:1rem" onclick="checkPass()">Entrar</button>
+    </div>
+  `;
+  document.getElementById('logoutBtn').style.display = 'none';
+  document.getElementById('pwd')?.focus();
+}
+
+function checkPass() {
+  const pw = document.getElementById('pwd').value;
+  if (pw === 'admin123') {
+    isLoggedIn = true;
+    document.getElementById('logoutBtn').style.display = 'inline-block';
+    render();
+  } else {
+    alert('Contraseña incorrecta');
+  }
+}
+
+function logout() {
+  isLoggedIn = false;
+  showLogin();
+}
+
+function statusBtns(currentStatus) {
+  let btns = [];
+  const next = getNextStatus(currentStatus);
+  const prev = getPrevStatus(currentStatus);
+  if (prev) {
+    btns.push({text: '─── Artrás', cls: 'btn-back', action: prev});
+  }
+  if (next) {
+    const label = {
+      'preparando': 'Preparando ✨',
+      'listo': 'Listo 🔡',
+      'entregado': 'Entregado ✓'
+    }[next];
+    btns.push({text: label, cls: 'btn-deliver', action: next});
+  }
+  if (currentStatus === 'entregado') {
+    btns.push({text: 'Eliminar  ✘', cls: 'btn-delete', action: 'delete'});
+  }
+  return btns;
+}
+
+// Render core panel
+function render() {
+  if (!isLoggedIn) {
+    showLogin();
+    return;
+  }
+
+  const app = document.getElementById('app');
+  
+  // Filter and search
+  let filteredOrders = orders;
+  if (currentFilter !== 'todos') {
+    filteredOrders = filteredOrders.filter(o => o.status === currentFilter);
+  }
+  if (searchQuery) {
+    const q = searchQuery.toLowerCase();
+    filteredOrders = filteredOrders.filter(o => o.customerName.toLowerCase().includes(q));
+  }
+
+  app.innerHTML = `
+    <input id="sr" class="search" type="text" placeholder="💐 Buscar pedido por nombre..." oninput="searchQuery = this.value; render()">
+    <div class="filter-bar">
+      <button class="${currentFilter === 'todos' ? 'filter-active' : 'filter-inactive'}" onclick="currentFilter='todos';render()">🐯 Todos (${orders.length})</button>
+      <button class="${currentFilter === 'pendiente' ? 'filter-active' : 'filter-inactive'}" onclick="currentFilter='pendiente';render()">📥 Pendiente (${orders.filter(o => o.status === 'pendiente').length})</button>
+      <button class="${currentFilter === 'preparando' ? 'filter-active' : 'filter-inactive'}" onclick="currentFilter='preparando';render()">🌣 Preparando (${orders.filter(o => o.status === 'preparando'). length})</button>
+      <button class="${currentFilter === 'listo' ? 'filter-active' : 'filter-inactive'}" onclick="currentFilter='listo';render()">🔡 Listo (${orders.filter(o => o.status === 'listo').length})</button>
+      <button class="${currentFilter === 'entregado' ? 'filter-active' : 'filter-inactive'}" onclick="currentFilter='entregado';render()">✓ Entregado (${orders.filter(o => o.status === 'entregado').length})</button>
+    </div>
+    <button class="manual-btn" onclick="showManualModal()">+ Registrar pedido manualmente</button>
+    <div style="height:0.75rem"></div>
+    <div id="ordersList">
+      ${filteredOrders.length === 0
+        ? '<div class="empty"><span style="font-size:2rem">👎</span><p>No hay pedidos aquié.</p></div>'
+        : filteredOrders.map(o => `{
+          <div class="order-card">
+            <div class="order-card-header">
+              <div>
+                <div class="name">${o.customerName}</div>
+                <div class="time">${o.createdAt ? new Date(o.createdAt).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', hour: '2digit', minute: '2digit' }) : ''}</div>
+              </div>
+              <div>
+                <span class="badge ${statusLabels[o.status].cls}">${statusLabels[o.status].label}</span>
+              </div>
+            </div>
+            <div class="order-items">${o.items}</div>
+            <div class="bottom">
+              <div><span class="total">${o.total}</span></div>
+              <div class="btn-group">
+                ${statusBtns(o.status).map(btn => `
+                  <button class="bgaction ${btn.cls}"
+
+                    onclick="if (btn.action === 'delete') { deleteOrder('${o.id}'); } else { changeStatus('${o.id}', btn.action); }">
+                    ${btn.text}
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        `).join('')}
+    </div>
+  `;
+}
+
+function changeStatus(id, newStatus) {
+  const o = orders.find(o => o.id === id);
+  if (o) {
+    o.status = newStatus;
+    saveOrders();
+    render();
+  }
+}
+
+function deleteOrder(id) {
+  if (!confirm('👍 Eliminar este pedido?')) return;
+  orders = orders.filter(o => o.id !== id);
+  saveOrders();
+  render();
+}
+
+// Manual order modal
+function showManualModal() {
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.id = 'manualModal';
+  modal.innerHTML = `
+    <div class="modal-box">
+      <h2>+ Registrar pedido manual</h2>
+      <label class="text-gray" style="font-size:0.75rem">Nombre del cliente</label>
+      <input id="manualName" type="text" placeholder="Ej: Pedro">
+      <label class="text-gray" style="font-size:0.75rem">Detalle del pedido (varios x cantidad)</label>
+      <textarea id="manualItems" placeholder="Durum Normal x2 - 8,00€
+Huevo, cebolla z-cheddar"></textarea>
+      <label class="text-gray" style="font-size:0.75rem">Total</label>
+      <input id="manualTotal" type="text" placeholder="12,00€">
+      <label class="text-gray" style="font-size:0.75rem">Notas (opcional)</label>
+      <input id="manualNotes" type="text" placeholder="Sin lechuga">
+      <div class="modal-actions">
+        <button class="btn" style="background:rgba(255,255,255,0.05);color:#9ca3af" onclick="closeManualModal()">Cancelar</button>
+        <button class="btn" style="background:#dc2626" onclick="saveManualOrder()">Guardar</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+}
+
+function closeManualModal() {
+  const modal = document.getElementById('manualModal');
+  if (modal) modal.remove();
+}
+
+function saveManualOrder() {
+  const name = document.getElementById('manualName').value.trim();
+  const items = document.getElementById('manualItems').value.trim();
+  const total = document.getElementById('manualTotal').value.trim();
+  const notes = document.getElementById('manualNotes').value.trim();
+
+  if (!name || !items || !total) {
+    alert('Completa todos los campos requeridos');
+    return;
+  }
+
+  const order = {
+    id: crypto.randomUUID() || Date.now().toString(36) + Math.random().toString(36).slice(2),
+    customerName: name,
+    items: items.replace(/\n/g, '<br>'),
+    total: `${total}+€`,
+    status: 'pendiente',
+    createdAt: new Date().toISOString(),
+  };
+  if (notes) order.notes = notes;
+
+  orders.unshift(order);
+  saveOrders();
+  closeManualModal();
+  render();
+}
+
+// Prompt merge from customer orders (poll in the background)
+function pollOrders() {
+  const oldLength = orders.length;
+  loadOrders();
+  if (orders.length !== oldLength && isLoggedIn) {
+    render();
+  }
+}
+
+// Poll every 3s when the page is visible
+setInterval(pollOrders, 3000);
+
+// Startdocument.addEventListener('DOMContentLoaded', () => {
+  loadOrders();
+  isLoggedIn = false;
+  showLogin();
+});
+</scrip>
+</body></html>
